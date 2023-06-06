@@ -1,10 +1,14 @@
 import './App.css'
 
+import Welcome from './components/Welcome'
+
 function App() {
   return (
-    <>
-      <h1>Quiz App</h1>
-    </>
+    <div className="App">
+      <h1>Quiz de Front-End</h1>
+
+      <Welcome />
+    </div>
   )
 }
 
