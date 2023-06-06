@@ -2,6 +2,12 @@
 
 Esse projeto foi desenvolvido utilizando os recursos nativos do framework **React**. Ao inserir um nome de usuário na barra de pesquisa e apertar "Enter" ou clicar no ícone de lupa é feita uma requisição para a **API** do **Github**, mais precisamente no endpoint **"/users"**. Caso o usuário exista, são renderizadas na tela informações como **foto do avatar, número de seguidores, número de usuários seguind**o e **localização** (caso definida). Se, pelo contrário, o usuário não existir, será renderizada uma mensagem de erro.
 
+![Screenshot 1](https://i.imgur.com/h6fQoE3.png)
+
+---
+
+![Screenshot 2](https://i.imgur.com/VRtSDrC.png)
+
 ## Instalação
 
 O projeto foi feito utilizando a versão **18.16.0** do [Node](https://nodejs.org/en), sendo necessária a instalação do mesmo. Após instalado, clone o repositório e instale as dependências do projeto.
