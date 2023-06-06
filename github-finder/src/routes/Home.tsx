@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { UserProps } from '../types/user';
 
 import Search from '../components/Search';
+import User from '../components/User';
 
 const Home = () => {
   const [user, setUser] = useState<UserProps | null>(null);
@@ -16,7 +17,7 @@ const Home = () => {
 
     const userData: UserProps = {
       avatar_url,
-      username,
+      username: login,
       location,
       followers,
       following
@@ -29,7 +30,7 @@ const Home = () => {
     <section>
       <Search loadUser={ loadUser } />
 
-      { user && <p>{ user.username }</p> }
+      { user && <User {...user} /> }
     </section>
   )
 }
