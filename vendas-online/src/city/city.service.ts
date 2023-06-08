@@ -22,7 +22,7 @@ export class CityService {
       return citiesCache;
     }
 
-    const cities = this.cityRepository.find({
+    const cities = await this.cityRepository.find({
       where: {
         stateId,
       },
