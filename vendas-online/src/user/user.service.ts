@@ -24,6 +24,7 @@ export class UserService {
     const newUser = {
       ...createUserDTO,
       password: hashedPassword,
+      typeUser: 1,
     };
 
     return this.userRepository.save(newUser);
