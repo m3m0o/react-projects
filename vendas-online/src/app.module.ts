@@ -9,6 +9,7 @@ import { AddressModule } from './address/address.module';
 
 import { UserEntity } from './user/entities/user.entity';
 import { StateEntity } from './state/entities/state.entity';
+import { CityEntity } from './city/entities/city.entity';
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import { StateEntity } from './state/entities/state.entity';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       port: Number(process.env.DB_PORT),
-      entities: [UserEntity, StateEntity],
+      entities: [UserEntity, StateEntity, CityEntity],
       migrations: [`${__dirname}/migration/{.ts,*.js}`],
       migrationsRun: true,
     }),
