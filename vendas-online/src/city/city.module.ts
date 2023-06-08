@@ -7,7 +7,7 @@ import { CityService } from './city.service';
 import { CityEntity } from './entities/city.entity';
 
 @Module({
-  imports: [CacheModule.register({}), TypeOrmModule.forFeature([CityEntity])],
+  imports: [CacheModule.register(), TypeOrmModule.forFeature([CityEntity])],
   controllers: [CityController],
   providers: [CityService],
 })
