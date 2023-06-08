@@ -6,11 +6,12 @@ import { UserModule } from './user/user.module';
 import { StateModule } from './state/state.module';
 import { CityModule } from './city/city.module';
 import { AddressModule } from './address/address.module';
+import { CacheModule } from './cache/cache.module';
 
 import { UserEntity } from './user/entities/user.entity';
 import { StateEntity } from './state/entities/state.entity';
 import { CityEntity } from './city/entities/city.entity';
-import { CacheModule } from './cache/cache.module';
+import { AddressEntity } from './address/entities/address.entity';
 
 @Module({
   imports: [
@@ -24,7 +25,7 @@ import { CacheModule } from './cache/cache.module';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       port: Number(process.env.DB_PORT),
-      entities: [UserEntity, StateEntity, CityEntity],
+      entities: [UserEntity, StateEntity, CityEntity, AddressEntity],
       migrations: [`${__dirname}/migration/{.ts,*.js}`],
       migrationsRun: true,
     }),
