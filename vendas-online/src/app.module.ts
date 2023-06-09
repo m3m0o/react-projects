@@ -1,6 +1,10 @@
 import { Module } from '@nestjs/common';
+import { APP_GUARD } from '@nestjs/core';
 import { ConfigModule } from '@nestjs/config';
+
 import { TypeOrmModule } from '@nestjs/typeorm';
+
+import { JwtModule } from '@nestjs/jwt';
 
 import { UserModule } from './user/user.module';
 import { StateModule } from './state/state.module';
@@ -13,6 +17,8 @@ import { StateEntity } from './state/entities/state.entity';
 import { CityEntity } from './city/entities/city.entity';
 import { AddressEntity } from './address/entities/address.entity';
 import { AuthModule } from './auth/auth.module';
+
+import { RolesGuard } from './user/guards/roles.guard';
 
 @Module({
   imports: [
@@ -36,8 +42,14 @@ import { AuthModule } from './auth/auth.module';
     AddressModule,
     CacheModule,
     AuthModule,
+    JwtModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
+  ],
 })
 export class AppModule {}
