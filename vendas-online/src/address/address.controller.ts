@@ -4,9 +4,11 @@ import {
   UsePipes,
   ValidationPipe,
   Body,
+  Get,
 } from '@nestjs/common';
 
 import { CreateAddressDTO } from './dtos/createAddress.dto';
+import { ReturnAddressDTO } from './dtos/returnAddress.dto';
 
 import { AddressService } from './address.service';
 
@@ -29,5 +31,16 @@ export class AddressController {
     @UserId('userId') userId: number,
   ): Promise<AddressEntity> {
     return this.addressService.createAddress(createAddressDTO, userId);
+  }
+
+  @UserTypes(UserType.User, UserType.Admin)
+  @Get()
+  async getAdressesByUserId(
+    @Body() createAddressDTO: CreateAddressDTO,
+    @UserId('userId') userId: number,
+  ): Promise<ReturnAddressDTO[]> {
+    return (await this.addressService.getAddressesByUserId(userId)).map(
+      (address) => new ReturnAddressDTO(address),
+    );
   }
 }
