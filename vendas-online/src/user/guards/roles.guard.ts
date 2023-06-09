@@ -3,7 +3,7 @@ import { Reflector } from '@nestjs/core';
 
 import { UserType } from '../enum/user-type.enum';
 
-import { ROLES_KEY } from '../decorators/user-type.decorator';
+import { ROLES_KEY } from '../../decorators/user-type.decorator';
 
 import { JwtService } from '@nestjs/jwt';
 
