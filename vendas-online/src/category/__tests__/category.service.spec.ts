@@ -22,6 +22,7 @@ describe('CategoryService', () => {
           useValue: {
             save: jest.fn().mockResolvedValue(categoryMock),
             find: jest.fn().mockResolvedValue([categoryMock]),
+            findOne: jest.fn().mockResolvedValue(categoryMock),
           },
         },
       ],
@@ -56,14 +57,34 @@ describe('CategoryService', () => {
   });
 
   it('should return category after save', async () => {
+    jest.spyOn(categoryRepository, 'findOne').mockResolvedValue(undefined);
+
     const category = await service.createCategory(createCategoryMock);
 
     expect(category).toEqual(categoryMock);
+  });
+
+  it('should return error if category name already exists', async () => {
+    expect(service.createCategory(createCategoryMock)).rejects.toThrowError();
   });
 
   it('should return error in exception', async () => {
     jest.spyOn(categoryRepository, 'save').mockRejectedValue(new Error());
 
     expect(service.createCategory(createCategoryMock)).rejects.toThrowError();
+  });
+
+  it('should return category by specified name', async () => {
+    const category = await service.getCategoryByName(createCategoryMock.name);
+
+    expect(category).toEqual(categoryMock);
+  });
+
+  it('should return error if given category name is empty', async () => {
+    jest.spyOn(categoryRepository, 'findOne').mockResolvedValue(undefined);
+
+    expect(
+      service.getCategoryByName(createCategoryMock.name),
+    ).rejects.toThrowError();
   });
 });
