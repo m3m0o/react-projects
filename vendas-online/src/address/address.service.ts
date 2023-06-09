@@ -5,6 +5,9 @@ import { Repository } from 'typeorm';
 
 import { AddressEntity } from './entities/address.entity';
 
+import { UserService } from 'src/user/user.service';
+import { CityService } from 'src/city/city.service';
+
 import { CreateAddressDTO } from './dtos/createAddress.dto';
 
 @Injectable()
@@ -12,12 +15,17 @@ export class AddressService {
   constructor(
     @InjectRepository(AddressEntity)
     private readonly addressRepository: Repository<AddressEntity>,
+    private readonly userService: UserService,
+    private readonly cityService: CityService,
   ) {}
 
   async createAddress(
     createAddressDTO: CreateAddressDTO,
     userId: number,
   ): Promise<AddressEntity> {
+    await this.userService.getUserById(userId);
+    await this.cityService.getCityById(createAddressDTO.cityId);
+
     return this.addressRepository.save({
       ...createAddressDTO,
       userId,
