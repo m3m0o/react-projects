@@ -5,6 +5,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 
 import { CategoryEntity } from './entities/category.entity';
 
+import { CreateCategoryDTO } from './dtos/createCategory.dto';
+
 @Injectable()
 export class CategoryService {
   constructor(
@@ -19,5 +21,13 @@ export class CategoryService {
       throw new NotFoundException('Categories empty.');
 
     return categories;
+  }
+
+  async createCategory(
+    createCategoryDTO: CreateCategoryDTO,
+  ): Promise<CategoryEntity> {
+    const category = await this.categoryRepository.save(createCategoryDTO);
+
+    return category;
   }
 }
