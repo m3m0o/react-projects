@@ -16,6 +16,9 @@ import { UserEntity } from './user/entities/user.entity';
 import { StateEntity } from './state/entities/state.entity';
 import { CityEntity } from './city/entities/city.entity';
 import { AddressEntity } from './address/entities/address.entity';
+import { CategoryEntity } from './category/entities/category.entity';
+import { ProductEntity } from './product/entities/product.entity';
+
 import { AuthModule } from './auth/auth.module';
 
 import { RolesGuard } from './user/guards/roles.guard';
@@ -34,7 +37,14 @@ import { ProductModule } from './product/product.module';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       port: Number(process.env.DB_PORT),
-      entities: [UserEntity, StateEntity, CityEntity, AddressEntity],
+      entities: [
+        UserEntity,
+        StateEntity,
+        CityEntity,
+        AddressEntity,
+        CategoryEntity,
+        ProductEntity,
+      ],
       migrations: [`${__dirname}/migration/{.ts,*.js}`],
       migrationsRun: true,
     }),

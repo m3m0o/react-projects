@@ -7,7 +7,7 @@ import {
   OneToMany,
 } from 'typeorm';
 
-import { ProductEntity } from 'src/product/entities/product.entity';
+import { ProductEntity } from '../../product/entities/product.entity';
 
 @Entity({ name: 'category' })
 export class CategoryEntity {
@@ -24,5 +24,5 @@ export class CategoryEntity {
   updatedAt: Date;
 
   @OneToMany(() => ProductEntity, (product: ProductEntity) => product.category)
-  products: ProductEntity[];
+  products?: ProductEntity[];
 }
