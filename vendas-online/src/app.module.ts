@@ -19,6 +19,8 @@ import { AddressEntity } from './address/entities/address.entity';
 import { AuthModule } from './auth/auth.module';
 
 import { RolesGuard } from './user/guards/roles.guard';
+import { CategoryModule } from './category/category.module';
+import { ProductModule } from './product/product.module';
 
 @Module({
   imports: [
@@ -43,6 +45,8 @@ import { RolesGuard } from './user/guards/roles.guard';
     CacheModule,
     AuthModule,
     JwtModule,
+    CategoryModule,
+    ProductModule,
   ],
   controllers: [],
   providers: [
