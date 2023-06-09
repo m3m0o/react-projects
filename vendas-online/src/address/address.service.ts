@@ -5,8 +5,8 @@ import { Repository } from 'typeorm';
 
 import { AddressEntity } from './entities/address.entity';
 
-import { UserService } from 'src/user/user.service';
-import { CityService } from 'src/city/city.service';
+import { UserService } from '../user/user.service';
+import { CityService } from '../city/city.service';
 
 import { CreateAddressDTO } from './dtos/createAddress.dto';
 

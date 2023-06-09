@@ -7,7 +7,7 @@ import {
   OneToMany,
 } from 'typeorm';
 
-import { AddressEntity } from 'src/address/entities/address.entity';
+import { AddressEntity } from '../../address/entities/address.entity';
 
 @Entity({ name: 'user' })
 export class UserEntity {

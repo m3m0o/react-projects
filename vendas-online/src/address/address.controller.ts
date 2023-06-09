@@ -12,10 +12,10 @@ import { AddressService } from './address.service';
 
 import { AddressEntity } from './entities/address.entity';
 
-import { UserTypes } from 'src/decorators/user-type.decorator';
-import { UserId } from 'src/decorators/user-id.decorator';
+import { UserTypes } from '../decorators/user-type.decorator';
+import { UserId } from '../decorators/user-id.decorator';
 
-import { UserType } from 'src/user/enum/user-type.enum';
+import { UserType } from '../user/enum/user-type.enum';
 
 @Controller('address')
 export class AddressController {
