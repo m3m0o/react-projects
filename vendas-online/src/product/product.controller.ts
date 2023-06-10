@@ -1,16 +1,35 @@
-import { Controller, Get } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 
 import { UserTypes } from 'src/decorators/user-type.decorator';
 import { UserType } from 'src/user/enum/user-type.enum';
 
 import { ProductService } from './product.service';
 
+import { ProductEntity } from './entities/product.entity';
+
+import { CreateProductDTO } from './dtos/createProduct.dto';
 import { ReturnProductDTO } from './dtos/returnProduct.dto';
 
 @UserTypes(UserType.Admin, UserType.User)
 @Controller('product')
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
+
+  @UserTypes(UserType.Admin)
+  @UsePipes(ValidationPipe)
+  @Post()
+  async createProduct(
+    @Body() createProductDTO: CreateProductDTO,
+  ): Promise<ProductEntity> {
+    return this.productService.createProduct(createProductDTO);
+  }
 
   @Get()
   async getAllProducts(): Promise<ReturnProductDTO[]> {
