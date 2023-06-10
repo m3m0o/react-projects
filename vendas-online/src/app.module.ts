@@ -27,6 +27,7 @@ import { CategoryModule } from './category/category.module';
 import { ProductModule } from './product/product.module';
 import { CartModule } from './cart/cart.module';
 import { CartProductModule } from './cart-product/cart-product.module';
+import { CartProductEntity } from './cart-product/entities/cartProduct.entity';
 
 @Module({
   imports: [
@@ -48,6 +49,7 @@ import { CartProductModule } from './cart-product/cart-product.module';
         CategoryEntity,
         ProductEntity,
         CartEntity,
+        CartProductEntity,
       ],
       migrations: [`${__dirname}/migration/{.ts,*.js}`],
       migrationsRun: true,
