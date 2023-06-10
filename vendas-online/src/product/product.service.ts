@@ -25,6 +25,18 @@ export class ProductService {
     return this.productRepository.save(createProductDTO);
   }
 
+  async getProductById(productId: number): Promise<ProductEntity> {
+    const product = await this.productRepository.findOne({
+      where: {
+        id: productId,
+      },
+    });
+
+    if (!product) throw new NotFoundException('Product not found.');
+
+    return product;
+  }
+
   async getAllProducts(): Promise<ProductEntity[]> {
     const products = await this.productRepository.find();
 

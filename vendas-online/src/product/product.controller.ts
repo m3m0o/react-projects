@@ -5,6 +5,7 @@ import {
   Post,
   UsePipes,
   ValidationPipe,
+  Param,
 } from '@nestjs/common';
 
 import { UserTypes } from 'src/decorators/user-type.decorator';
@@ -35,6 +36,15 @@ export class ProductController {
   async getAllProducts(): Promise<ReturnProductDTO[]> {
     return (await this.productService.getAllProducts()).map(
       (product) => new ReturnProductDTO(product),
+    );
+  }
+
+  @Get('/:productId')
+  async getProductById(
+    @Param('productId') productId: number,
+  ): Promise<ReturnProductDTO> {
+    return new ReturnProductDTO(
+      await this.productService.getProductById(productId),
     );
   }
 }
