@@ -40,7 +40,7 @@ export class CartProductEntity {
 
   @ManyToOne(
     () => CartEntity,
-    (cartEntity: CartEntity) => cartEntity.cartsProduct,
+    (cartEntity: CartEntity) => cartEntity.cartProducts,
   )
   @JoinColumn({ name: 'cart_id', referencedColumnName: 'id' })
   cart?: CartEntity;

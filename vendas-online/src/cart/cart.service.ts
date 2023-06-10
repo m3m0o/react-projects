@@ -24,11 +24,22 @@ export class CartService {
     });
   }
 
-  async verifyActiveCart(userId: number): Promise<CartEntity> {
+  async getActiveCart(
+    userId: number,
+    withRelations?: boolean,
+  ): Promise<CartEntity> {
     const cart = await this.cartRepository.findOne({
       where: {
         userId,
+        active: true,
       },
+      relations: withRelations
+        ? {
+            cartProducts: {
+              product: true,
+            },
+          }
+        : undefined,
     });
 
     if (!cart) throw new NotFoundException('User has no carts.');
@@ -40,7 +51,7 @@ export class CartService {
     insertProductInCartDTO: InsertProductInCartDTO,
     userId: number,
   ): Promise<CartEntity> {
-    const cart = await this.verifyActiveCart(userId).catch(
+    const cart = await this.getActiveCart(userId, true).catch(
       async () => await this.createCart(userId),
     );
 

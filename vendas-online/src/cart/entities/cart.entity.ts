@@ -30,5 +30,5 @@ export class CartEntity {
     () => CartProductEntity,
     (cartProductEntity: CartProductEntity) => cartProductEntity.cart,
   )
-  cartsProduct?: CartProductEntity;
+  cartProducts?: CartProductEntity[];
 }
