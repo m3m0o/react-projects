@@ -6,7 +6,10 @@ import {
   UsePipes,
   ValidationPipe,
   Param,
+  Delete,
 } from '@nestjs/common';
+
+import { DeleteResult } from 'typeorm';
 
 import { UserTypes } from 'src/decorators/user-type.decorator';
 import { UserType } from 'src/user/enum/user-type.enum';
@@ -30,6 +33,14 @@ export class ProductController {
     @Body() createProductDTO: CreateProductDTO,
   ): Promise<ProductEntity> {
     return this.productService.createProduct(createProductDTO);
+  }
+
+  @UserTypes(UserType.Admin)
+  @Delete('/:productId')
+  async deleteProduct(
+    @Param('productId') productId: number,
+  ): Promise<DeleteResult> {
+    return this.productService.deleteProduct(productId);
   }
 
   @Get()
