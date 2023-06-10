@@ -6,6 +6,7 @@ import { DeleteResult, Repository } from 'typeorm';
 import { CartEntity } from './entities/cart.entity';
 
 import { InsertProductInCartDTO } from './dtos/insertProductInCart.dto';
+import { UpdateCartDTO } from './dtos/updateCart.dto';
 
 import { CartProductService } from 'src/cart-product/cart-product.service';
 
@@ -77,5 +78,19 @@ export class CartService {
     );
 
     return cart;
+  }
+
+  async updateProductInCart(updateCartDTO: UpdateCartDTO, userId: number): Promise<CartEntity> {
+    const cart = await this.getActiveCart(userId).catch(() => this.createCart(userId));
+
+    await this.cartProductService.updateProductInCart(updateCartDTO, cart);
+
+    return cart;
+  }
+
+  async deleteProductFromCart(productId: number, userId: number): Promise<DeleteResult> {
+    const cart = await this.getActiveCart(userId);
+
+    return this.cartProductService.deleteProductFromCart(productId, cart.id);
   }
 }
