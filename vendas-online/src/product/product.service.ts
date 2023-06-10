@@ -6,6 +6,7 @@ import { Repository, DeleteResult } from 'typeorm';
 import { ProductEntity } from './entities/product.entity';
 
 import { CreateProductDTO } from './dtos/createProduct.dto';
+import { UpdateProductDTO } from './dtos/updateProduct.dto';
 
 import { CategoryService } from '../category/category.service';
 
@@ -23,6 +24,18 @@ export class ProductService {
     await this.categoryService.getCategoryById(createProductDTO.categoryId);
 
     return this.productRepository.save(createProductDTO);
+  }
+
+  async updateProduct(
+    updateProductDTO: UpdateProductDTO,
+    productId: number,
+  ): Promise<ProductEntity> {
+    const product = await this.getProductById(productId);
+
+    return this.productRepository.save({
+      ...product,
+      ...updateProductDTO,
+    });
   }
 
   async deleteProduct(productId: number): Promise<DeleteResult> {
