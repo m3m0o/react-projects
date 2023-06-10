@@ -10,7 +10,7 @@ import { LoginDTO } from './dtos/login.dto';
 import { LoginPayloadDTO } from './dtos/loginPayload.dto';
 import { ReturnLoginDTO } from './dtos/returnLogin.dto';
 
-import { compareHashedStrings } from 'src/utils/hashing';
+import { compareStringWithHashedString } from 'src/utils/hashing';
 
 @Injectable()
 export class AuthService {
@@ -24,7 +24,7 @@ export class AuthService {
       .getUserByEmail(loginDTO.email)
       .catch(() => undefined);
 
-    const isPasswordCorrect = await compareHashedStrings(
+    const isPasswordCorrect = await compareStringWithHashedString(
       loginDTO.password,
       user?.password || '',
     );

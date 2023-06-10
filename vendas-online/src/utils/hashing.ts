@@ -4,9 +4,9 @@ export const hashString = (str: string): Promise<string> => {
   return hash(str, 10);
 };
 
-export const compareHashedStrings = (
-  str1: string,
-  str2: string,
+export const compareStringWithHashedString = async (
+  str: string,
+  hashedString: string,
 ): Promise<boolean> => {
-  return compare(str1, str2);
+  return compare(str, hashedString);
 };
