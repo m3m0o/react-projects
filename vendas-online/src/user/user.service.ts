@@ -3,12 +3,14 @@ import {
   Injectable,
   NotFoundException,
 } from '@nestjs/common';
-import * as bcrypt from 'bcrypt';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm/dist';
 
 import { CreateUserDTO } from './dtos/createUser.dto';
+
 import { UserEntity } from './entities/user.entity';
+
+import { hashString } from 'src/utils/hashing';
 
 @Injectable()
 export class UserService {
@@ -24,12 +26,7 @@ export class UserService {
 
     if (user) throw new BadRequestException('Email already registered.');
 
-    const saltOrRounds = 10;
-
-    const hashedPassword = await bcrypt.hash(
-      createUserDTO.password,
-      saltOrRounds,
-    );
+    const hashedPassword = await hashString(createUserDTO.password);
 
     const newUser = {
       ...createUserDTO,

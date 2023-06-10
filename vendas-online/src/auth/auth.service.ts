@@ -1,7 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
-import * as bcrypt from 'bcrypt';
-
 import { UserService } from '../user/user.service';
 import { UserEntity } from '../user/entities/user.entity';
 import { ReturnUserDTO } from '../user/dtos/returnUser.dto';
@@ -11,6 +9,8 @@ import { JwtService } from '@nestjs/jwt';
 import { LoginDTO } from './dtos/login.dto';
 import { LoginPayloadDTO } from './dtos/loginPayload.dto';
 import { ReturnLoginDTO } from './dtos/returnLogin.dto';
+
+import { compareHashedStrings } from 'src/utils/hashing';
 
 @Injectable()
 export class AuthService {
@@ -24,7 +24,7 @@ export class AuthService {
       .getUserByEmail(loginDTO.email)
       .catch(() => undefined);
 
-    const isPasswordCorrect = await bcrypt.compare(
+    const isPasswordCorrect = await compareHashedStrings(
       loginDTO.password,
       user?.password || '',
     );
