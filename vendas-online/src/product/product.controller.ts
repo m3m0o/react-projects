@@ -12,8 +12,8 @@ import {
 
 import { DeleteResult } from 'typeorm';
 
-import { UserTypes } from 'src/decorators/user-type.decorator';
-import { UserType } from 'src/user/enum/user-type.enum';
+import { UserTypes } from '../decorators/user-type.decorator';
+import { UserType } from '../user/enum/user-type.enum';
 
 import { ProductService } from './product.service';
 

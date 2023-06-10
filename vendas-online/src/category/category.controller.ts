@@ -13,7 +13,7 @@ import { CreateCategoryDTO } from './dtos/createCategory.dto';
 import { ReturnCategoryDTO } from './dtos/returnCategory.dto';
 
 import { UserTypes } from '../decorators/user-type.decorator';
-import { UserType } from 'src/user/enum/user-type.enum';
+import { UserType } from '../user/enum/user-type.enum';
 
 @UserTypes(UserType.User, UserType.Admin)
 @Controller('category')

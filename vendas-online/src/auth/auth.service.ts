@@ -10,7 +10,7 @@ import { LoginDTO } from './dtos/login.dto';
 import { LoginPayloadDTO } from './dtos/loginPayload.dto';
 import { ReturnLoginDTO } from './dtos/returnLogin.dto';
 
-import { compareStringWithHashedString } from 'src/utils/hashing';
+import { compareStringWithHashedString } from '../utils/hashing';
 
 @Injectable()
 export class AuthService {
