@@ -4,7 +4,11 @@ import {
   Body,
   UsePipes,
   ValidationPipe,
+  Get,
+  Delete
 } from '@nestjs/common';
+
+import { DeleteResult } from 'typeorm';
 
 import { UserId } from 'src/decorators/user-id.decorator';
 
@@ -35,5 +39,15 @@ export class CartController {
         userId,
       ),
     );
+  }
+
+  @Get()
+  async getActiveCart(@UserId() userId: number): Promise<ReturnCartDTO> {
+    return new ReturnCartDTO(await this.cartService.getActiveCart(userId, true))
+  }
+
+  @Delete()
+  async clearCart(@UserId() userId: number): Promise<DeleteResult> {
+    return this.cartService.clearCart(userId);
   }
 }
