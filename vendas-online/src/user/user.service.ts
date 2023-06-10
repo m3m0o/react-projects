@@ -2,15 +2,17 @@ import {
   BadRequestException,
   Injectable,
   NotFoundException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm/dist';
 
 import { CreateUserDTO } from './dtos/createUser.dto';
+import { UpdatePasswordDTO } from './dtos/updatePassword.dto';
 
 import { UserEntity } from './entities/user.entity';
 
-import { hashString } from 'src/utils/hashing';
+import { hashString, compareStringWithHashedString } from '../utils/hashing';
 
 @Injectable()
 export class UserService {
@@ -35,6 +37,28 @@ export class UserService {
     };
 
     return this.userRepository.save(newUser);
+  }
+
+  async updatePassword(
+    updatePasswordDTO: UpdatePasswordDTO,
+    userId: number,
+  ): Promise<UserEntity> {
+    const user = await this.getUserById(userId);
+
+    const isEnteredCurrentPasswordCorret = await compareStringWithHashedString(
+      updatePasswordDTO.currentPassword,
+      user.password || '',
+    );
+
+    if (!isEnteredCurrentPasswordCorret)
+      throw new UnauthorizedException('Invalid current password.');
+
+    const hashedNewPassword = await hashString(updatePasswordDTO.newPassword);
+
+    return this.userRepository.save({
+      ...user,
+      password: hashedNewPassword,
+    });
   }
 
   async getAllUsers(): Promise<UserEntity[]> {
