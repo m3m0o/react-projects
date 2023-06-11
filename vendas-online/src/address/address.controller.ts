@@ -36,7 +36,6 @@ export class AddressController {
   @UserTypes(UserType.User, UserType.Admin)
   @Get()
   async getAdressesByUserId(
-    @Body() createAddressDTO: CreateAddressDTO,
     @UserId('userId') userId: number,
   ): Promise<ReturnAddressDTO[]> {
     return (await this.addressService.getAddressesByUserId(userId)).map(
