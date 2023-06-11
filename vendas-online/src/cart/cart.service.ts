@@ -8,7 +8,7 @@ import { CartEntity } from './entities/cart.entity';
 import { InsertProductInCartDTO } from './dtos/insertProductInCart.dto';
 import { UpdateCartDTO } from './dtos/updateCart.dto';
 
-import { CartProductService } from 'src/cart-product/cart-product.service';
+import { CartProductService } from '../cart-product/cart-product.service';
 
 const AFFECTED_LINES = 1;
 

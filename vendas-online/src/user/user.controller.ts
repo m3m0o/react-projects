@@ -13,7 +13,7 @@ import { UserService } from './user.service';
 import { UserEntity } from './entities/user.entity';
 
 import { UserType } from './enum/user-type.enum';
-import { UserTypes } from 'src/decorators/user-type.decorator';
+import { UserTypes } from '../decorators/user-type.decorator';
 
 import { UserId } from '../decorators/user-id.decorator';
 

@@ -12,12 +12,10 @@ import {
 
 import { DeleteResult } from 'typeorm';
 
-import { UserId } from 'src/decorators/user-id.decorator';
+import { UserId } from '../decorators/user-id.decorator';
 
-import { UserTypes } from 'src/decorators/user-type.decorator';
-import { UserType } from 'src/user/enum/user-type.enum';
-
-import { CartEntity } from './entities/cart.entity';
+import { UserTypes } from '../decorators/user-type.decorator';
+import { UserType } from '../user/enum/user-type.enum';
 
 import { InsertProductInCartDTO } from './dtos/insertProductInCart.dto';
 import { UpdateCartDTO } from './dtos/updateCart.dto';
