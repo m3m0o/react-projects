@@ -6,7 +6,7 @@ import { AddressService } from '../address.service';
 import { ReturnAddressDTO } from '../dtos/returnAddress.dto';
 
 import { createAddressMock } from '../__mocks__/createAddress.mock';
-import { userEntityMock } from 'src/user/__mocks__/user.mock';
+import { userEntityMock } from '../../user/__mocks__/user.mock';
 import { addressEntityMock } from '../__mocks__/address.mock';
 
 describe('AddressController', () => {
