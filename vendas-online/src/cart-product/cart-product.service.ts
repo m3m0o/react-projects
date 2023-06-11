@@ -66,18 +66,27 @@ export class CartProductService {
     });
   }
 
-  async updateProductInCart(updateCartDTO: UpdateCartDTO, cart: CartEntity): Promise<CartProductEntity> {
-   const cartProduct = await this.verifyProductInCart(updateCartDTO.productId, cart.id);
-   
-   if (!cartProduct) throw new NotFoundException('Product is not in cart.');
+  async updateProductInCart(
+    updateCartDTO: UpdateCartDTO,
+    cart: CartEntity,
+  ): Promise<CartProductEntity> {
+    const cartProduct = await this.verifyProductInCart(
+      updateCartDTO.productId,
+      cart.id,
+    );
 
-   return this.cartProductRepository.save({
-    ...cartProduct,
-    amount: updateCartDTO.amount
-   })
+    if (!cartProduct) throw new NotFoundException('Product is not in cart.');
+
+    return this.cartProductRepository.save({
+      ...cartProduct,
+      amount: updateCartDTO.amount,
+    });
   }
 
-  async deleteProductFromCart(productId: number, cartId: number): Promise<DeleteResult> {
-    return this.cartProductRepository.delete({ cartId, productId })
+  async deleteProductFromCart(
+    productId: number,
+    cartId: number,
+  ): Promise<DeleteResult> {
+    return this.cartProductRepository.delete({ cartId, productId });
   }
 }
