@@ -4,7 +4,10 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   Column,
+  OneToMany,
 } from 'typeorm';
+
+import { PaymentEntity } from 'src/payment/entities/payment.entity';
 
 @Entity({ name: 'payment_status' })
 export class PaymentStatusEntity {
@@ -19,4 +22,7 @@ export class PaymentStatusEntity {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+  @OneToMany(() => PaymentEntity, (payment) => payment.paymentStatus)
+  payments?: PaymentEntity[];
 }
