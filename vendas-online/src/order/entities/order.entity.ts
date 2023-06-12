@@ -9,10 +9,10 @@ import {
   OneToMany,
 } from 'typeorm';
 
-import { AddressEntity } from 'src/address/entities/address.entity';
-import { PaymentEntity } from 'src/payment/entities/payment.entity';
-import { UserEntity } from 'src/user/entities/user.entity';
-import { OrderProductEntity } from 'src/order-product/entities/order-product.entity';
+import { AddressEntity } from '../../address/entities/address.entity';
+import { PaymentEntity } from '../../payment/entities/payment.entity';
+import { UserEntity } from '../../user/entities/user.entity';
+import { OrderProductEntity } from '../../order-product/entities/order-product.entity';
 
 @Entity({ name: 'order' })
 export class OrderEntity {

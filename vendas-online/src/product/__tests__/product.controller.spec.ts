@@ -8,7 +8,7 @@ import { ReturnProductDTO } from '../dtos/returnProduct.dto';
 import { productMock } from '../__mocks__/product.mock';
 import { createProductMock } from '../__mocks__/createProduct.mock';
 import { updateProductMock } from '../__mocks__/updateProduct.mock';
-import { deleteResultMock } from 'src/__mocks__/deleteResult.mock';
+import { deleteResultMock } from '../../__mocks__/deleteResult.mock';
 import { productsMock } from '../__mocks__/products.mock';
 
 describe('ProductController', () => {

@@ -10,8 +10,8 @@ import {
   JoinColumn,
 } from 'typeorm';
 
-import { PaymentStatusEntity } from 'src/payment-status/entities/payment-status.entity';
-import { OrderEntity } from 'src/order/entities/order.entity';
+import { PaymentStatusEntity } from '../../payment-status/entities/payment-status.entity';
+import { OrderEntity } from '../../order/entities/order.entity';
 
 @Entity({ name: 'payment' })
 @TableInheritance({ column: { name: 'type', type: 'varchar' } })

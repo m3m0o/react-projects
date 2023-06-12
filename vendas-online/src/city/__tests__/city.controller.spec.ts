@@ -4,7 +4,7 @@ import { CityController } from '../city.controller';
 import { CityService } from '../city.service';
 
 import { citiesMock } from '../__mocks__/cities.mock';
-import { stateEntityMock } from 'src/state/__mocks__/state.mock';
+import { stateEntityMock } from '../../state/__mocks__/state.mock';
 
 describe('CityController', () => {
   let controller: CityController;

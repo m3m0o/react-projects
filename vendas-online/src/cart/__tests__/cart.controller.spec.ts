@@ -7,10 +7,10 @@ import { ReturnCartDTO } from '../dtos/returnCart.dto';
 
 import { cartMock } from '../__mocks__/cart.mock';
 import { insertProductInCartDTOMock } from '../__mocks__/insertProductInCartDTO.mock';
-import { userEntityMock } from 'src/user/__mocks__/user.mock';
+import { userEntityMock } from '../../user/__mocks__/user.mock';
 import { updateCartMock } from '../__mocks__/updateCart.mock';
-import { productMock } from 'src/product/__mocks__/product.mock';
-import { deleteResultMock } from 'src/__mocks__/deleteResult.mock';
+import { productMock } from '../../product/__mocks__/product.mock';
+import { deleteResultMock } from '../../__mocks__/deleteResult.mock';
 
 describe('CartController', () => {
   let controller: CartController;

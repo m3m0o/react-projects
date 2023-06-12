@@ -7,7 +7,7 @@ import {
   OneToMany,
 } from 'typeorm';
 
-import { PaymentEntity } from 'src/payment/entities/payment.entity';
+import { PaymentEntity } from '../../payment/entities/payment.entity';
 
 @Entity({ name: 'payment_status' })
 export class PaymentStatusEntity {
