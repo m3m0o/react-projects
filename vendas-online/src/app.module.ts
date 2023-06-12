@@ -23,6 +23,8 @@ import { PaymentEntity } from './payment/entities/payment.entity';
 import { PaymentStatusEntity } from './payment-status/entities/payment-status.entity';
 import { PaymentPixEntity } from './payment/entities/payment-pix.entity';
 import { PaymentCreditCardEntity } from './payment/entities/payment-credit-card.entity';
+import { OrderEntity } from './order/entities/order.entity';
+import { OrderProductEntity } from './order-product/entities/order-product.entity';
 
 import { AuthModule } from './auth/auth.module';
 
@@ -62,6 +64,8 @@ import { OrderProductModule } from './order-product/order-product.module';
         PaymentPixEntity,
         PaymentCreditCardEntity,
         PaymentStatusEntity,
+        OrderEntity,
+        OrderProductEntity,
       ],
       migrations: [`${__dirname}/migration/{.ts,*.js}`],
       migrationsRun: true,

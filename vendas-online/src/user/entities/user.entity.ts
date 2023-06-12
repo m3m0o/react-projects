@@ -42,5 +42,6 @@ export class UserEntity {
   @OneToMany(() => AddressEntity, (address) => address.user)
   addresses?: AddressEntity[];
 
-  orders: OrderEntity[];
+  @OneToMany(() => OrderEntity, (order) => order.address)
+  orders?: OrderEntity[];
 }
