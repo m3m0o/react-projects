@@ -1,13 +1,17 @@
 import {
   Body,
   Controller,
-  Param,
   Post,
   UsePipes,
   ValidationPipe,
+  Get,
 } from '@nestjs/common';
 
 import { OrderService } from './order.service';
+
+import { OrderEntity } from './entities/order.entity';
+
+import { UserId } from 'src/decorators/user-id.decorator';
 
 import { CreateOrderDTO } from './dtos/create-order.dto';
 
@@ -16,11 +20,16 @@ export class OrderController {
   constructor(private readonly orderService: OrderService) {}
 
   @UsePipes(ValidationPipe)
-  @Post('/cart/:cartId')
+  @Post('')
   async createOrder(
     @Body() createOrderDTO: CreateOrderDTO,
-    @Param('cartId') cartId: number,
+    @UserId() userId: number,
   ) {
-    return this.orderService.createOrder(createOrderDTO, cartId);
+    return this.orderService.createOrder(createOrderDTO, userId);
+  }
+
+  @Get()
+  async getOrdersByUserId(@UserId() userId: number): Promise<OrderEntity[]> {
+    return this.orderService.getOrdersByUserId(userId);
   }
 }

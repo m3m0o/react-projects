@@ -1,7 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository, DeleteResult } from 'typeorm';
+import { Repository, DeleteResult, In } from 'typeorm';
 
 import { ProductEntity } from './entities/product.entity';
 
@@ -58,6 +58,21 @@ export class ProductService {
 
   async getAllProducts(): Promise<ProductEntity[]> {
     const products = await this.productRepository.find();
+
+    if (!products || products.length === 0)
+      throw new NotFoundException('There are no products registered.');
+
+    return products;
+  }
+
+  async getProductsByProductsId(
+    productsId: number[],
+  ): Promise<ProductEntity[]> {
+    const products = await this.productRepository.find({
+      where: {
+        id: In(productsId),
+      },
+    });
 
     if (!products || products.length === 0)
       throw new NotFoundException('There are no products registered.');

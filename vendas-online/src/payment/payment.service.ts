@@ -6,6 +6,9 @@ import { Repository } from 'typeorm';
 import { PaymentEntity } from './entities/payment.entity';
 import { PaymentCreditCardEntity } from './entities/payment-credit-card.entity';
 import { PaymentPixEntity } from './entities/payment-pix.entity';
+import { ProductEntity } from 'src/product/entities/product.entity';
+import { CartEntity } from 'src/cart/entities/cart.entity';
+import { CartProductEntity } from 'src/cart-product/entities/cartProduct.entity';
 
 import { CreateOrderDTO } from '../order/dtos/create-order.dto';
 
@@ -18,13 +21,36 @@ export class PaymentService {
     private readonly paymentRepository: Repository<PaymentEntity>,
   ) {}
 
-  async createPayment(createOrderDTO: CreateOrderDTO): Promise<PaymentEntity> {
+  generateFinalPrice(cart: CartEntity, products: ProductEntity[]) {
+    return cart.cartProducts
+      ?.map((cartProduct) => {
+        const product = products.find(
+          (product) => product.id === cartProduct.productId,
+        );
+
+        if (product) return product.price * cartProduct.amount;
+
+        return 0;
+      })
+      .reduce(
+        (accumulatedPrice, currentPrice) => accumulatedPrice + currentPrice,
+        0,
+      );
+  }
+
+  async createPayment(
+    createOrderDTO: CreateOrderDTO,
+    products: ProductEntity[],
+    cart: CartEntity,
+  ): Promise<PaymentEntity> {
+    const finalPrice = this.generateFinalPrice(cart, products);
+
     if (createOrderDTO.amountPayments) {
       const paymentCreditCard = new PaymentCreditCardEntity(
         PaymentStatus.Done,
+        finalPrice,
         0,
-        0,
-        0,
+        finalPrice,
         createOrderDTO,
       );
 
@@ -32,9 +58,9 @@ export class PaymentService {
     } else if (createOrderDTO.codePix && createOrderDTO.datePayment) {
       const paymentPix = new PaymentPixEntity(
         PaymentStatus.Done,
+        finalPrice,
         0,
-        0,
-        0,
+        finalPrice,
         createOrderDTO,
       );
 
