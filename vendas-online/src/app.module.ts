@@ -19,6 +19,10 @@ import { AddressEntity } from './address/entities/address.entity';
 import { CategoryEntity } from './category/entities/category.entity';
 import { ProductEntity } from './product/entities/product.entity';
 import { CartEntity } from './cart/entities/cart.entity';
+import { PaymentEntity } from './payment/entities/payment.entity';
+import { PaymentStatusEntity } from './payment-status/entities/payment-status.entity';
+import { PaymentPixEntity } from './payment/entities/payment-pix.entity';
+import { PaymentCreditCardEntity } from './payment/entities/payment-credit-card.entity';
 
 import { AuthModule } from './auth/auth.module';
 
@@ -28,6 +32,8 @@ import { ProductModule } from './product/product.module';
 import { CartModule } from './cart/cart.module';
 import { CartProductModule } from './cart-product/cart-product.module';
 import { CartProductEntity } from './cart-product/entities/cartProduct.entity';
+import { PaymentStatusModule } from './payment-status/payment-status.module';
+import { PaymentModule } from './payment/payment.module';
 
 @Module({
   imports: [
@@ -50,6 +56,10 @@ import { CartProductEntity } from './cart-product/entities/cartProduct.entity';
         ProductEntity,
         CartEntity,
         CartProductEntity,
+        PaymentEntity,
+        PaymentPixEntity,
+        PaymentCreditCardEntity,
+        PaymentStatusEntity,
       ],
       migrations: [`${__dirname}/migration/{.ts,*.js}`],
       migrationsRun: true,
@@ -65,6 +75,8 @@ import { CartProductEntity } from './cart-product/entities/cartProduct.entity';
     ProductModule,
     CartModule,
     CartProductModule,
+    PaymentStatusModule,
+    PaymentModule,
   ],
   controllers: [],
   providers: [
