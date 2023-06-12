@@ -5,7 +5,7 @@ export class CreateTableStatus1686570471175 implements MigrationInterface {
     queryRunner.query(`
       CREATE TABLE public.payment_status (
         id integer NOT NULL,
-        name character NOT NULL,
+        name character varying NOT NULL,
         created_at timestamp without time zone DEFAULT now() NOT NULL,
         updated_at timestamp without time zone DEFAULT now() NOT NULL,
         primary key (id)
