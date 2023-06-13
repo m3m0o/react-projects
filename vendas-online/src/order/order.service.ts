@@ -8,10 +8,10 @@ import { OrderProductService } from '../order-product/order-product.service';
 import { ProductService } from '../product/product.service';
 
 import { OrderEntity } from './entities/order.entity';
-import { OrderProductEntity } from 'src/order-product/entities/order-product.entity';
+import { OrderProductEntity } from '../order-product/entities/order-product.entity';
 import { PaymentEntity } from '../payment/entities/payment.entity';
-import { CartEntity } from 'src/cart/entities/cart.entity';
-import { ProductEntity } from 'src/product/entities/product.entity';
+import { CartEntity } from '../cart/entities/cart.entity';
+import { ProductEntity } from '../product/entities/product.entity';
 
 import { CreateOrderDTO } from './dtos/create-order.dto';
 

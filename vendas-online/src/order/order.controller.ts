@@ -11,7 +11,7 @@ import { OrderService } from './order.service';
 
 import { OrderEntity } from './entities/order.entity';
 
-import { UserId } from 'src/decorators/user-id.decorator';
+import { UserId } from '../decorators/user-id.decorator';
 
 import { CreateOrderDTO } from './dtos/create-order.dto';
 

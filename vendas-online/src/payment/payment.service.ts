@@ -6,13 +6,12 @@ import { Repository } from 'typeorm';
 import { PaymentEntity } from './entities/payment.entity';
 import { PaymentCreditCardEntity } from './entities/payment-credit-card.entity';
 import { PaymentPixEntity } from './entities/payment-pix.entity';
-import { ProductEntity } from 'src/product/entities/product.entity';
-import { CartEntity } from 'src/cart/entities/cart.entity';
-import { CartProductEntity } from 'src/cart-product/entities/cartProduct.entity';
+import { ProductEntity } from '../product/entities/product.entity';
+import { CartEntity } from '../cart/entities/cart.entity';
 
 import { CreateOrderDTO } from '../order/dtos/create-order.dto';
 
-import { PaymentStatus } from 'src/payment-status/enums/payment-status.enum';
+import { PaymentStatus } from '../payment-status/enums/payment-status.enum';
 
 @Injectable()
 export class PaymentService {
