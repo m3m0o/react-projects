@@ -1,3 +1,5 @@
+import Head from 'next/head';
+
 import { Post } from '@/types/post';
 
 import { getAllPosts } from '@/utils/posts-util';
@@ -11,7 +13,19 @@ interface AllPostsPageProps {
 const AllPostsPage = (props: AllPostsPageProps) => {
   const { posts } = props;
 
-  return <AllPosts posts={posts} />;
+  return (
+    <>
+      <Head>
+        <title>All Posts</title>
+        <meta
+          name='description'
+          content='A list of all programming-related tutorials and posts!'
+        />
+      </Head>
+
+      <AllPosts posts={posts} />
+    </>
+  );
 };
 
 export const getStaticProps = () => {
