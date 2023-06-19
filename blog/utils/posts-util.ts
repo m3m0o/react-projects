@@ -7,14 +7,14 @@ import { Post } from '@/types/post';
 
 const POSTS_DIRECTORY = path.join(process.cwd(), 'content', 'posts');
 
-const getPostData = (fileName: string): Post => {
-  const filePath = path.join(POSTS_DIRECTORY, fileName);
+export const getPostData = (fileName: string): Post => {
+  const postSlug = fileName.replace(/\.md$/, '');
+
+  const filePath = path.join(POSTS_DIRECTORY, `${postSlug}.md`);
 
   const fileContent = fs.readFileSync(filePath, 'utf-8');
 
   const { data, content } = matter(fileContent);
-
-  const postSlug = fileName.replace(/\.md$/, '');
 
   const post = {
     slug: postSlug,
@@ -25,8 +25,12 @@ const getPostData = (fileName: string): Post => {
   return post as Post;
 };
 
+export const getPostsFiles = () => {
+  return fs.readdirSync(POSTS_DIRECTORY);
+};
+
 export const getAllPosts = (): Post[] => {
-  const postFiles = fs.readdirSync(POSTS_DIRECTORY);
+  const postFiles = getPostsFiles();
 
   const posts = postFiles.map((file) => getPostData(file));
 
