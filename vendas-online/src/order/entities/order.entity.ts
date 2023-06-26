@@ -39,17 +39,17 @@ export class OrderEntity {
 
   @ManyToOne(() => UserEntity, (user) => user.orders)
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
-  user: UserEntity;
+  user?: UserEntity;
 
   @ManyToOne(() => AddressEntity, (address) => address.orders)
   @JoinColumn({ name: 'address_id', referencedColumnName: 'id' })
-  address: AddressEntity;
+  address?: AddressEntity;
 
   @ManyToOne(() => PaymentEntity, (payment) => payment.orders)
   @JoinColumn({ name: 'payment_id', referencedColumnName: 'id' })
-  payment: PaymentEntity;
+  payment?: PaymentEntity;
 
   @OneToMany(() => OrderProductEntity, (orderProduct) => orderProduct.order)
   @JoinColumn({ name: 'user_id', referencedColumnName: 'id' })
-  orderProducts: OrderProductEntity[];
+  orderProducts?: OrderProductEntity[];
 }

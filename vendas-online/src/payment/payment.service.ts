@@ -20,21 +20,24 @@ export class PaymentService {
     private readonly paymentRepository: Repository<PaymentEntity>,
   ) {}
 
-  generateFinalPrice(cart: CartEntity, products: ProductEntity[]) {
-    return cart.cartProducts
-      ?.map((cartProduct) => {
-        const product = products.find(
-          (product) => product.id === cartProduct.productId,
-        );
+  generateFinalPrice(cart: CartEntity, products: ProductEntity[]): number {
+    return Number(
+      cart.cartProducts
+        ?.map((cartProduct) => {
+          const product = products.find(
+            (product) => product.id === cartProduct.productId,
+          );
 
-        if (product) return product.price * cartProduct.amount;
+          if (product) return product.price * cartProduct.amount;
 
-        return 0;
-      })
-      .reduce(
-        (accumulatedPrice, currentPrice) => accumulatedPrice + currentPrice,
-        0,
-      );
+          return 0;
+        })
+        .reduce(
+          (accumulatedPrice, currentPrice) => accumulatedPrice + currentPrice,
+          0,
+        )
+        .toFixed(2),
+    );
   }
 
   async createPayment(
