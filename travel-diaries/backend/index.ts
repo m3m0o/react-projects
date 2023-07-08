@@ -12,13 +12,14 @@ const app: Express = express();
 const port = process.env.PORT;
 
 // Middlewares
+app.use(express.json());
 
 app.use('/user', userRouter);
 
 // Connections
 mongoose
   .connect(
-    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.cisli3v.mongodb.net/?retryWrites=true&w=majority`
+    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.cisli3v.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`
   )
   .then(() =>
     app.listen(port, () => {
