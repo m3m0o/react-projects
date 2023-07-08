@@ -5,6 +5,7 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
 import userRouter from './routing/user-routes';
+import postRouter from './routing/post-routes';
 
 dotenv.config();
 
@@ -15,6 +16,8 @@ const port = process.env.PORT;
 app.use(express.json());
 
 app.use('/user', userRouter);
+
+app.use('/post', postRouter);
 
 // Connections
 mongoose
