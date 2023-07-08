@@ -1,3 +1,7 @@
+export const isValidString = (str: string) => {
+  return str !== '' && str.trim() !== '';
+};
+
 export const isValidName = (name: string) => {
   const regex =
     /^[a-zA-ZàáâäãåąčćęèéêëėįìíîïłńòóôöõøùúûüųūÿýżźñçčšžÀÁÂÄÃÅĄĆČĖĘÈÉÊËÌÍÎÏĮŁŃÒÓÔÖÕØÙÚÛÜŲŪŸÝŻŹÑßÇŒÆČŠŽ∂ð ,.'-]+$/u;
