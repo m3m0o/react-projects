@@ -133,3 +133,21 @@ export const updatePost = async (request: Request, response: Response) => {
 
   return response.status(200).json({ message: 'Updated Successfully !' });
 };
+
+export const deletePost = async (request: Request, response: Response) => {
+  const id = request.params.id;
+
+  let post;
+
+  try {
+    post = await Post.findByIdAndDelete(id);
+  } catch (error) {
+    return console.log(error);
+  }
+
+  if (!post) {
+    return response.status(500).json({ message: 'Unable to delete.' });
+  }
+
+  return response.status(200).json({ message: 'Post deleted successfully !' });
+};

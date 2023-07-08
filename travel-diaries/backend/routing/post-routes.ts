@@ -2,6 +2,7 @@ import { Router } from 'express';
 
 import {
   createPost,
+  deletePost,
   getAllPosts,
   getPostById,
   updatePost,
@@ -16,5 +17,7 @@ postRouter.get('/:id', getPostById);
 postRouter.post('/', createPost);
 
 postRouter.put('/:id', updatePost);
+
+postRouter.delete('/:id', deletePost);
 
 export default postRouter;
