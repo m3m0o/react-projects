@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 
-import { hashSync } from 'bcrypt';
+import { compareSync, hashSync } from 'bcrypt';
 
 import {
   isValidName,
@@ -65,4 +65,34 @@ export const signUp = async (request: Request, response: Response) => {
   }
 
   return response.status(201).json({ user });
+};
+
+export const login = async (request: Request, response: Response) => {
+  const { email, password } = request.body;
+
+  let existingUser;
+
+  try {
+    existingUser = await User.findOne({ email });
+  } catch (error) {
+    return console.log(error);
+  }
+
+  if (!existingUser) {
+    return response
+      .status(400)
+      .json({ message: 'Invalid e-mail or password.' });
+  }
+
+  const isPasswordCorrect = compareSync(password, existingUser.password);
+
+  if (!isPasswordCorrect) {
+    return response
+      .status(400)
+      .json({ message: 'Invalid e-mail or password.' });
+  }
+
+  return response
+    .status(200)
+    .json({ id: existingUser.id, message: 'Login successfull !' });
 };
