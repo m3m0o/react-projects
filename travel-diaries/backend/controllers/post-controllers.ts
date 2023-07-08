@@ -88,3 +88,48 @@ export const createPost = async (request: Request, response: Response) => {
 
   return response.status(201).json({ post });
 };
+
+export const updatePost = async (request: Request, response: Response) => {
+  const id = request.params.id;
+  const { title, description, location, date, image } = request.body;
+
+  if (!isValidString(title)) {
+    return response.status(422).json({ message: 'Invalid title.' });
+  }
+
+  if (!isValidString(description)) {
+    return response.status(422).json({ message: 'Invalid description.' });
+  }
+
+  if (!isValidString(location)) {
+    return response.status(422).json({ message: 'Invalid location.' });
+  }
+
+  if (!date) {
+    return response.status(422).json({ message: 'Invalid date.' });
+  }
+
+  if (!isValidString(image)) {
+    return response.status(422).json({ message: 'Invalid image path.' });
+  }
+
+  let post;
+
+  try {
+    post = await Post.findByIdAndUpdate(id, {
+      title,
+      description,
+      location,
+      date: new Date(`${date}`),
+      image,
+    });
+  } catch (error) {
+    return console.log(error);
+  }
+
+  if (!post) {
+    return response.status(500).json({ message: 'Unable to update.' });
+  }
+
+  return response.status(200).json({ message: 'Updated Successfully !' });
+};
