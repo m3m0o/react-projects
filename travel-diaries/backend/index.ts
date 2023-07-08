@@ -1,4 +1,7 @@
 import express, { Express, Request, Response } from 'express';
+
+import mongoose from 'mongoose';
+
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -6,10 +9,16 @@ dotenv.config();
 const app: Express = express();
 const port = process.env.PORT;
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Express + TypeScript Server');
-});
+// Middlewares
 
-app.listen(port, () => {
-  console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
-});
+// Connections
+mongoose
+  .connect(
+    `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASSWORD}@cluster0.cisli3v.mongodb.net/?retryWrites=true&w=majority`
+  )
+  .then(() =>
+    app.listen(port, () => {
+      console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
+    })
+  )
+  .catch((error) => console.log(error));
