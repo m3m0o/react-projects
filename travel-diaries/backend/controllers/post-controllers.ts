@@ -20,6 +20,24 @@ export const getAllPosts = async (request: Request, response: Response) => {
   return response.status(200).json({ posts });
 };
 
+export const getPostById = async (request: Request, response: Response) => {
+  const id = request.params.id;
+
+  let post;
+
+  try {
+    post = await Post.findById(id);
+  } catch (error) {
+    return console.log(error);
+  }
+
+  if (!post) {
+    return response.status(404).json({ message: 'No post found.' });
+  }
+
+  return response.status(200).json({ post });
+};
+
 export const createPost = async (request: Request, response: Response) => {
   const { title, description, location, date, image, user } = request.body;
 
