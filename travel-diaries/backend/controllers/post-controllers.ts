@@ -1,8 +1,11 @@
 import { Request, Response } from 'express';
 
+import { startSession } from 'mongoose';
+
 import { isValidString } from '../utils/validators';
 
 import Post from '../models/Post';
+import User from '../models/User';
 
 export const getAllPosts = async (request: Request, response: Response) => {
   let posts;
@@ -65,6 +68,18 @@ export const createPost = async (request: Request, response: Response) => {
     return response.status(422).json({ message: 'Invalid user.' });
   }
 
+  let existingUser;
+
+  try {
+    existingUser = await User.findById(user);
+  } catch (error) {
+    console.log(error);
+  }
+
+  if (!existingUser) {
+    return response.status(404).json({ message: 'User not found.' });
+  }
+
   let post;
 
   try {
@@ -77,7 +92,16 @@ export const createPost = async (request: Request, response: Response) => {
       user,
     });
 
-    post = await post.save();
+    const session = await startSession();
+
+    session.startTransaction();
+
+    existingUser.posts.push(post as any);
+    existingUser.save({ session });
+
+    post = await post.save({ session });
+
+    session.commitTransaction();
   } catch (error) {
     return console.log(error);
   }
@@ -140,7 +164,18 @@ export const deletePost = async (request: Request, response: Response) => {
   let post;
 
   try {
+    const session = await startSession();
+
+    session.startTransaction();
+
+    post = await Post.findById(id).populate('user');
+
+    post.user.posts.pull(post);
+
+    await post?.user.save({ session });
     post = await Post.findByIdAndDelete(id);
+
+    session.commitTransaction();
   } catch (error) {
     return console.log(error);
   }
