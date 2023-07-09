@@ -11,11 +11,21 @@ import {
   CardActions,
 } from '@mui/material';
 
+import { Post } from '../../types/Post';
+
 import EditLocationAltIcon from '@mui/icons-material/EditLocationAlt';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-function DiaryItem() {
+interface DiaryItemProps {
+  post: Post;
+}
+
+function DiaryItem(props: DiaryItemProps) {
+  const { title, description, location, date, image } = props.post;
+
+  const formattedDate = new Date(`${date}`).toLocaleDateString();
+
   return (
     <Card
       sx={{
@@ -39,18 +49,14 @@ function DiaryItem() {
             <EditLocationAltIcon />
           </IconButton>
         }
-        title='Shrimp and Chorizo Paella'
-        subheader='September 14, 2016'
+        title={location}
+        header={location}
+        subheader={formattedDate}
       />
-      <CardMedia
-        component='img'
-        height='194'
-        image='https://lh3.googleusercontent.com/pw/AIL4fc_ib3XnblTVrgVgG0mu3XO1gr-RxPkwWxNU41wpM-ri6XFENc13fBrQPSaPUFGQx4Ypu6tbG12eyymCCX8yZro4npgcTu9c8-gxyzhqD_DK4Vhse_kOU66GyS_6sLdtNJzdvymoigLWB94gVi0Mrg4QqQ=w1500-h692-s-no?authuser=2'
-        alt='Paella dish'
-      />
+      <CardMedia component='img' height='194' image={image} alt={title} />
       <CardContent>
         <Typography paddingBottom={1} variant='h5' color='text.secondary'>
-          Simple things
+          {title}
         </Typography>
 
         <hr />
@@ -66,9 +72,7 @@ function DiaryItem() {
           </Typography>
 
           <Typography variant='body2' color='text.secondary'>
-            This impressive paella is a perfect party dish and a fun meal to
-            cook together with your guests. Add 1 cup of frozen peas along with
-            the mussels, if you like.
+            {description}
           </Typography>
         </Box>
       </CardContent>

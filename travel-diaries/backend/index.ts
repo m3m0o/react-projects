@@ -1,5 +1,7 @@
 import express, { Express, Request, Response } from 'express';
 
+import cors from 'cors';
+
 import mongoose from 'mongoose';
 
 import dotenv from 'dotenv';
@@ -13,6 +15,8 @@ const app: Express = express();
 const port = process.env.PORT;
 
 // Middlewares
+app.use(cors());
+
 app.use(express.json());
 
 app.use('/user', userRouter);
