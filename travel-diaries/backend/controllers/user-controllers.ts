@@ -94,5 +94,5 @@ export const login = async (request: Request, response: Response) => {
 
   return response
     .status(200)
-    .json({ id: existingUser.id, message: 'Login successfull !' });
+    .json({ user: existingUser, message: 'Login successfull !' });
 };

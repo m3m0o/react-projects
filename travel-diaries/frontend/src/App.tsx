@@ -4,6 +4,8 @@ import Header from './components/header/Header';
 import Home from './components/home/Home';
 import Diaries from './components/diaries/Diaries';
 import Auth from './components/auth/Auth';
+import Add from './components/diaries/Add';
+import Profile from './components/profile/Profile';
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
           <Route path='/' element={<Home />} />
           <Route path='/diaries' element={<Diaries />} />
           <Route path='/auth' element={<Auth />} />
+          <Route path='/add' element={<Add />} />
+          <Route path='/profile' element={<Profile />} />
         </Routes>
       </section>
     </>
