@@ -34,3 +34,21 @@ export const sendAuthRequest = async (
 
   return responseData;
 };
+
+export const createPost = async (post: Post) => {
+  const response = await fetch('http://localhost:5000/post/', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ ...post, user: localStorage.getItem('userId') }),
+  }).catch((error) => {
+    throw new Error(error as string);
+  });
+
+  if (response.status !== 201) return console.log('Unexpected error ocurred.');
+
+  const data = (await response.json()) as { post: Post };
+
+  return data;
+};
