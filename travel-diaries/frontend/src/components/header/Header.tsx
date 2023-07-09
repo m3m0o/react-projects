@@ -1,17 +1,19 @@
 import { useState } from 'react';
 
+import { Link } from 'react-router-dom';
+
 import { AppBar, Toolbar, Tabs, Tab } from '@mui/material';
 
 import ModeOfTravelIcon from '@mui/icons-material/ModeOfTravel';
 
-const links = ['Home', 'Diaries', 'Auth'];
+const links = ['home', 'diaries', 'auth'];
 
 function Header() {
   const [value, setValue] = useState(0);
 
   return (
     <header>
-      <AppBar sx={{ backgroundColor: 'transparent' }}>
+      <AppBar sx={{ backgroundColor: 'transparent', position: 'sticky' }}>
         <Toolbar>
           <ModeOfTravelIcon sx={{ color: 'black' }} />
 
@@ -22,6 +24,8 @@ function Header() {
           >
             {links.map((link) => (
               <Tab
+                LinkComponent={Link}
+                to={`/${link === 'home' ? '' : link}`}
                 sx={{
                   textDecoration: 'none',
                   ':hover': {
