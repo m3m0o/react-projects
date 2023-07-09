@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 import { Box } from '@mui/system';
 
 import {
@@ -22,9 +24,14 @@ interface DiaryItemProps {
 }
 
 function DiaryItem(props: DiaryItemProps) {
-  const { title, description, location, date, image } = props.post;
+  const { _id, title, description, location, date, image, user } = props.post;
 
   const formattedDate = new Date(`${date}`).toLocaleDateString();
+
+  const isLoggedInUser = () => {
+    if (localStorage.getItem('userId') === user) return true;
+    else return false;
+  };
 
   return (
     <Card
@@ -77,15 +84,17 @@ function DiaryItem(props: DiaryItemProps) {
         </Box>
       </CardContent>
 
-      <CardActions sx={{ marginLeft: 'auto' }}>
-        <IconButton>
-          <EditIcon />
-        </IconButton>
+      {isLoggedInUser() && (
+        <CardActions sx={{ marginLeft: 'auto' }}>
+          <IconButton LinkComponent={Link} to={`/post/${_id}`}>
+            <EditIcon />
+          </IconButton>
 
-        <IconButton color='error'>
-          <DeleteIcon />
-        </IconButton>
-      </CardActions>
+          <IconButton color='error'>
+            <DeleteIcon />
+          </IconButton>
+        </CardActions>
+      )}
     </Card>
   );
 }

@@ -115,7 +115,7 @@ export const createPost = async (request: Request, response: Response) => {
 
 export const updatePost = async (request: Request, response: Response) => {
   const id = request.params.id;
-  const { title, description, location, date, image } = request.body;
+  const { title, description, location, image } = request.body;
 
   if (!isValidString(title)) {
     return response.status(422).json({ message: 'Invalid title.' });
@@ -129,10 +129,6 @@ export const updatePost = async (request: Request, response: Response) => {
     return response.status(422).json({ message: 'Invalid location.' });
   }
 
-  if (!date) {
-    return response.status(422).json({ message: 'Invalid date.' });
-  }
-
   if (!isValidString(image)) {
     return response.status(422).json({ message: 'Invalid image path.' });
   }
@@ -144,7 +140,6 @@ export const updatePost = async (request: Request, response: Response) => {
       title,
       description,
       location,
-      date: new Date(`${date}`),
       image,
     });
   } catch (error) {
@@ -155,7 +150,7 @@ export const updatePost = async (request: Request, response: Response) => {
     return response.status(500).json({ message: 'Unable to update.' });
   }
 
-  return response.status(200).json({ message: 'Updated Successfully !' });
+  return response.status(200).json({ post });
 };
 
 export const deletePost = async (request: Request, response: Response) => {

@@ -52,3 +52,35 @@ export const createPost = async (post: Post) => {
 
   return data;
 };
+
+export const getPostDetails = async (id: string) => {
+  const response = await fetch(`http://localhost:5000/post/${id}`).catch(
+    (error) => {
+      throw new Error(error as string);
+    }
+  );
+
+  if (response.status !== 200) return console.log('Unable to fetch diary.');
+
+  const data = (await response.json()) as { post: Post };
+
+  return data;
+};
+
+export const updatePost = async (post: Post) => {
+  const response = await fetch(`http://localhost:5000/post/${post._id!}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(post),
+  }).catch((error) => {
+    throw new Error(error as string);
+  });
+
+  if (response.status !== 200) return console.log('Unable to update');
+
+  const data = (await response.json()) as { post: Post };
+
+  return data;
+};

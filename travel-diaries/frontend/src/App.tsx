@@ -6,6 +6,7 @@ import Diaries from './components/diaries/Diaries';
 import Auth from './components/auth/Auth';
 import Add from './components/diaries/Add';
 import Profile from './components/profile/Profile';
+import DiaryUpdate from './components/diaries/DiaryUpdate';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path='/auth' element={<Auth />} />
           <Route path='/add' element={<Add />} />
           <Route path='/profile' element={<Profile />} />
+          <Route path='/post/:id' element={<DiaryUpdate />} />
         </Routes>
       </section>
     </>
