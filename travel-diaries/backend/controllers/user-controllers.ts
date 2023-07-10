@@ -26,6 +26,22 @@ export const getAllUsers = async (request: Request, response: Response) => {
   return response.status(200).json({ users });
 };
 
+export const getUserById = async (request: Request, response: Response) => {
+  const id = request.params.id;
+
+  let user;
+
+  try {
+    user = await User.findById(id).populate('posts');
+  } catch (error) {
+    return console.log(error);
+  }
+
+  if (!user) return response.status(404).json({ message: 'No user found.' });
+
+  return response.status(200).json({ user });
+};
+
 export const signUp = async (request: Request, response: Response) => {
   const { name, email, password } = request.body;
 

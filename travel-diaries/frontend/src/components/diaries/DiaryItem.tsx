@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { Link } from 'react-router-dom';
 
 import { Box } from '@mui/system';
@@ -11,9 +13,13 @@ import {
   IconButton,
   Typography,
   CardActions,
+  Snackbar,
+  Alert,
 } from '@mui/material';
 
 import { Post } from '../../types/Post';
+
+import { deletePost } from '../../helpers/api';
 
 import EditLocationAltIcon from '@mui/icons-material/EditLocationAlt';
 import EditIcon from '@mui/icons-material/Edit';
@@ -26,11 +32,21 @@ interface DiaryItemProps {
 function DiaryItem(props: DiaryItemProps) {
   const { _id, title, description, location, date, image, user } = props.post;
 
-  const formattedDate = new Date(`${date}`).toLocaleDateString();
+  const formattedDate = new Date(`${date!}`).toLocaleDateString();
+
+  const [open, setOpen] = useState(false);
 
   const isLoggedInUser = () => {
     if (localStorage.getItem('userId') === user) return true;
     else return false;
+  };
+
+  const handleDelete = () => {
+    deletePost(_id!)
+      .then((data) => console.log(data))
+      .catch((error) => {
+        throw new Error(error as string);
+      });
   };
 
   return (
@@ -90,11 +106,25 @@ function DiaryItem(props: DiaryItemProps) {
             <EditIcon />
           </IconButton>
 
-          <IconButton color='error'>
+          <IconButton onClick={handleDelete} color='error'>
             <DeleteIcon />
           </IconButton>
         </CardActions>
       )}
+
+      <Snackbar
+        open={open}
+        autoHideDuration={6000}
+        onClose={() => setOpen(false)}
+      >
+        <Alert
+          onClose={() => setOpen(false)}
+          severity='success'
+          sx={{ width: '100%' }}
+        >
+          This is a success message!
+        </Alert>
+      </Snackbar>
     </Card>
   );
 }
