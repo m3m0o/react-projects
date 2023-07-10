@@ -1,5 +1,7 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 
+import { useNavigate } from 'react-router-dom';
+
 import { Box, Typography, FormLabel, TextField, Button } from '@mui/material';
 
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
@@ -7,6 +9,8 @@ import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import { createPost } from '../../helpers/api';
 
 function Add() {
+  const navigate = useNavigate();
+
   const [inputs, setInputs] = useState({
     title: '',
     description: '',
@@ -26,10 +30,14 @@ function Add() {
     event.preventDefault();
 
     createPost({ ...inputs })
-      .then((response) => console.log(response))
+      .then((response) => {
+        console.log(response);
+      })
       .catch((error) => {
         throw new Error(error as string);
       });
+
+    navigate('/diaries');
   };
 
   return (

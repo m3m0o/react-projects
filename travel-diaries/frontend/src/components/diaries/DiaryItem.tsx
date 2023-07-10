@@ -18,6 +18,7 @@ import {
 } from '@mui/material';
 
 import { Post } from '../../types/Post';
+import { User } from '../../types/User';
 
 import { deletePost } from '../../helpers/api';
 
@@ -27,6 +28,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 interface DiaryItemProps {
   post: Post;
+  user?: User;
 }
 
 function DiaryItem(props: DiaryItemProps) {
@@ -64,7 +66,7 @@ function DiaryItem(props: DiaryItemProps) {
       <CardHeader
         avatar={
           <Avatar sx={{ backgroundColor: 'red' }} aria-label='recipe'>
-            R
+            {user.name[0] || props.user.name}
           </Avatar>
         }
         action={

@@ -1,5 +1,7 @@
 import { useState, FormEvent, ChangeEvent } from 'react';
 
+import { useNavigate } from 'react-router-dom';
+
 import { useDispatch } from 'react-redux/es/exports';
 
 import { Box, Typography, FormLabel, TextField, Button } from '@mui/material';
@@ -9,6 +11,7 @@ import { authActions } from '../../store';
 import { sendAuthRequest } from '../../helpers/api';
 
 function Auth() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const [isSignup, setIsSignup] = useState(false);
@@ -26,8 +29,12 @@ function Auth() {
     event.preventDefault();
 
     sendAuthRequest(isSignup, inputs)
-      .then((data) => localStorage.setItem('userId', data.user._id))
-      .then(() => dispatch(authActions.login()))
+      .then((data) => {
+        localStorage.setItem('userId', data.user._id as string);
+        dispatch(authActions.login());
+
+        navigate('/diaries');
+      })
       .catch((error) => console.log(error));
   };
 
